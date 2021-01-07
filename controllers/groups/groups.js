@@ -140,11 +140,49 @@ var getGroupMessages=async(req,res,next)=>{
 
 }
 
+var getGroupDetails=async(req,res,next)=>{
+    // rememer to auth who makes can see those messages
+    try{
+      
+        const page = req.query.page    || 1 ;
+         const itemPerPage = 10 ;
+        const {GID}=req.query;
+       if(!GID){
+           return Response.BadRequest(res)
+       }
+       if(GID){
+        const group=  await Gmassages.findById(GID)
+        if(group.members.indexOf(req.userId.toString())===-1){
+            return Response.Unauthorized(res)
+        }
+        return Response.Ok(res,"",group)
+        
+
+       }
+
+      const user =await User.findById(req.userId.toString())
+      .populate("groups")
+
+      return Response.Ok(res,"",user)
+
+    
+        }catch(err){
+            console.debug(err)
+                if(!err.statusCode){
+                    err.statusCode = 500; 
+                }
+                return next(err);
+        }
+        
+
+}
+
 module.exports={
     createGroup,
     addMember,
     sendMessage,
-    getGroupMessages
+    getGroupMessages,
+    getGroupDetails
     
 
 
