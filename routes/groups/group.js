@@ -23,7 +23,17 @@ Router.put('/addMember',[
 
 ],verfytoken,groupConttroller.addMember);
 
+Router.post('/sendMessage',[
+   
+    // body('memberId')
+    // .not()
+    // .isEmpty(),
+    // body('roomId')
+    // .not()
+    // .isEmpty(),
+    
 
+],verfytoken,groupConttroller.sendMessage);
 
 module.exports=Router
 
