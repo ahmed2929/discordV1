@@ -16,7 +16,8 @@ const groupMessagSchema = new schema({
 gui:{
     type:mongoose.Types.ObjectId,
     ref:"Groups",
-    required:true
+    required:true,
+    index:true
 },
 
 dateTime:Date
