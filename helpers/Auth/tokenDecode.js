@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const User = require('../../models/CustomerUser');
+const User = require('../../models/User');
 
 module.exports = async (req,res,next)=>{
     const authHeader = req.get('Authorization');
@@ -33,7 +33,7 @@ module.exports = async (req,res,next)=>{
         }
 
         if(user.blocked==true){
-            const error = new Error('تم حظرك من البرنامج لسوء الاستخدام');
+            const error = new Error('you are blocked from using the app');
             error.statusCode = 403 ;
             return next(error) ;
 

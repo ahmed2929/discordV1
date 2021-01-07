@@ -1,6 +1,6 @@
 const admin = require("firebase-admin");
 const io = require("../../socket.io.settings");
-const Cuser=require('../models/CustomerUser')
+const Cuser=require('../models/User')
 const Tuser=require('../models/TrederUsers')
 const Notificaton=require('../models/notifications')
 //  data notificaton userid status

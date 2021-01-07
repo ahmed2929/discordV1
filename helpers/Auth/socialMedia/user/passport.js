@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const FacebookTokenStrategy = require('passport-facebook-token');
-const customerUser = require('../../../../models/CustomerUser');
+const User = require('../../../../models/User');
 
 // Google OAuth Strategy
 passport.use('googleToken', new GooglePlusTokenStrategy({
@@ -21,7 +21,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
     //console.log('refreshToken', refreshToken);
 
       // We're in the account creation process
-      let existingUser = await customerUser.findOne({ "google.id": profile.id });
+      let existingUser = await User.findOne({ "google.id": profile.id });
       if (existingUser) {
           req.user=existingUser
           existingUser.FCMJwt.push(req.body.FCM)
@@ -29,7 +29,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
       }
 
       // Check if we have someone with the same email
-      let existingUserLocal = await customerUser.findOne({ "local.email": profile.emails[0].value })
+      let existingUserLocal = await User.findOne({ "local.email": profile.emails[0].value })
       if (existingUserLocal) {
         // We want to merge google's data with local auth
         req.user=existingUserLocal
@@ -38,7 +38,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
         return done(null, existingUserLocal);
       }
 
-      let existingUserfacbook = await customerUser.findOne({ "facebook.email": profile.emails[0].value })
+      let existingUserfacbook = await User.findOne({ "facebook.email": profile.emails[0].value })
       if (existingUserfacbook) {
         // We want to merge google's data with local auth
         req.user=existingUserfacbook
@@ -47,7 +47,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
         return done(null, existingUserfacbook);
       }
       
-      const newUser = new customerUser({
+      const newUser = new User({
         methods: 'google',
         google: {
           id: profile.id,
@@ -80,7 +80,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
      console.log('accessToken', accessToken);
     
        // We're in the account creation process
-      let existingUser = await customerUser.findOne({ "facebook.id": profile.id });
+      let existingUser = await User.findOne({ "facebook.id": profile.id });
       if (existingUser) {
         req.user=existingUser
         console.debug('user aready exist')
@@ -88,7 +88,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
        }
 
        // Check if we have someone with the same email
-       let existingUserLocal = await customerUser.findOne({ "local.email": profile.emails[0].value })
+       let existingUserLocal = await User.findOne({ "local.email": profile.emails[0].value })
        if (existingUserLocal) {
          // We want to merge google's data with local auth
          req.user=existingUserLocal
@@ -97,7 +97,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
          return done(null, existingUserLocal);
        }
 
-       let existingUsergoogle = await customerUser.findOne({ "google.email": profile.emails[0].value })
+       let existingUsergoogle = await User.findOne({ "google.email": profile.emails[0].value })
        if (existingUsergoogle) {
          // We want to merge google's data with local auth
          existingUsergoogle.FCMJwt.push(req.body.FCM)
@@ -106,7 +106,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
          return done(null, existingUsergoogle);
        }
 
-       const newUser = new customerUser({
+       const newUser = new User({
          methods: 'facebook',
          facebook: {
            id: profile.id,
