@@ -9,7 +9,7 @@ socket.on('::chat/new-massage/sent',async(data)=>{
         sender,
         to,
         mesg
-
+//
 
     })
     

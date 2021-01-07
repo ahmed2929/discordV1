@@ -72,6 +72,10 @@ const userSchema = new schema({
       type:String,
       expires: 3600*60
     },
+    groups:[{
+      type:mongoose.Types.ObjectId,
+      ref:"Groups"
+    }]
 
 });
 
