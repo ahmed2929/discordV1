@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const {validationResult} = require('express-validator');
 const User = require('../../models/user');
-const sendEmail=require('../../../helpers/sendEmail').sendEmail
+const sendEmail=require('../../helpers/general/sendEmail').sendEmail
 const messages=require("../../helpers/general/emailMessages")
 var register=async (req,res,next)=>{
 
@@ -325,7 +325,7 @@ const PasswordRest = (req,res,next)=>{ //put
     }
 
 
-    User.findById(req.userId).then(user=>{
+    User.findById(req.userId).then(async user=>{
         if(!user){
             const error = new Error('User not Found');
             error.statusCode = 404 ;
