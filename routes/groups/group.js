@@ -35,5 +35,7 @@ Router.post('/sendMessage',[
 
 ],verfytoken,groupConttroller.sendMessage);
 
+Router.get('/getGroupMessages',verfytoken,groupConttroller.getGroupMessages);
+
 module.exports=Router
 

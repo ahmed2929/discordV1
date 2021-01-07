@@ -21,7 +21,7 @@ const { model } = require("mongoose");
   }
 
   // 201 Ok
-  function Created (res:, messsage,data)  {
+  function Created (res, messsage,data)  {
     return res.status(201).json( {
         messsage:messsage||'data created',
         data

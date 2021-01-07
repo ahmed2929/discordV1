@@ -113,10 +113,38 @@ var sendMessage=async(req,res,next)=>{
 
 }
 
+var getGroupMessages=async(req,res,next)=>{
+    // rememer to auth who makes can see those messages
+    try{
+      
+        const page = req.query.page    || 1 ;
+         const itemPerPage = 10 ;
+        const {GID}=req.query;
+       if(!GID){
+           return Response.BadRequest(res)
+       }
+    const messageResult=  await Gmassages.find({gui:GID}).sort(dateTime)
+       .skip((page - 1) * itemPerPage)
+       .limit(itemPerPage);
+       Response.Ok(res,"",messageResult)
+
+    
+        }catch(err){
+            console.debug(err)
+                if(!err.statusCode){
+                    err.statusCode = 500; 
+                }
+                return next(err);
+        }
+        
+
+}
+
 module.exports={
     createGroup,
     addMember,
-    sendMessage
+    sendMessage,
+    getGroupMessages
     
 
 
