@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const schema   = mongoose.Schema;
 
-const userSchema = new schema({
+const groupSchema = new schema({
    name:{
        type:String,
        required:true
@@ -24,4 +24,4 @@ const userSchema = new schema({
 
 });
 
-module.exports = mongoose.model('Groups',userSchema);
+module.exports = mongoose.model('Groups',groupSchema);
