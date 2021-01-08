@@ -80,10 +80,6 @@ const userSchema = new schema({
       type:mongoose.Types.ObjectId,
       ref:"User"
     }],
-    FRequests:[{
-      type:mongoose.Types.ObjectId,
-      ref:"FRequest"
-    }]
 
 });
 

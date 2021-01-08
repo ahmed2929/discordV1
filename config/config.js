@@ -4,6 +4,7 @@ const socketR=require('../events/eventResciver')
 const socketS=require('../events/eventSender')
 const authRoute=require("../routes/Auth/user")
 const groupRoutes=require("../routes/groups/group")
+const userRoutes =require("../routes/user/user")
 const addMiddlware=(app)=>{
    app.use(cors())
    app.use(bodyParser.json());
@@ -21,6 +22,7 @@ const addAPIS=(app)=>{
    })
    app.use('/v1/auth',authRoute);
    app.use('/v1/groups',groupRoutes);
+   app.use('/v1/user',userRoutes);
 
 //
    return app
