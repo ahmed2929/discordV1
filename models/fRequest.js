@@ -14,6 +14,14 @@ const userSchema = new schema({
     to:{
         type:mongoose.Types.ObjectId,
         ref:"User"
+    },
+    GI:{
+        type:mongoose.Types.ObjectId,
+        ref:"Groups"
+    },
+    canChat:{
+        type:Boolean,
+        default:false
     }
 });
 

@@ -19,7 +19,11 @@ const groupSchema = new schema({
    members:[{
        type:mongoose.Types.ObjectId,
        ref:"User"
-   }]
+   }],
+   PriviteGroup:{
+       type:Boolean,
+       default:false
+   }
 
 
 });

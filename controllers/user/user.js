@@ -60,7 +60,18 @@ var acceptFriendRequest=async(req,res,next)=>{
         const {requestId}=req.body;
      
    const frequest = await fRequest.find({_id:requestId,to:req.userId})
+ const pg= await  Group.create({
+       name:`chat with ${frequest.from} and ${frequest.to}`,
+       admin:frequest.from,
+       members:[frequest.from,frequest.to],
+       PriviteGroup:true
+   })
+
+  await pg.save()
+
    frequest.status=1;
+   frequest.canChat=true,
+   frequest.GI=pg._id
  await  frequest.save()
 
  const from=     await fRequest.findById(frequest.from)
@@ -95,6 +106,4 @@ module.exports={
     sendFriendRequest,
     acceptFriendRequest
     
-
-
 }
