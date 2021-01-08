@@ -15,5 +15,17 @@ Router.post('/sendFriendRequest',[
 ],verfytoken,Conttroller.sendFriendRequest);
 
 
+Router.post('/acceptFriendRequest',[
+   
+    body('to')
+    .not()
+    .isEmpty(),
+  
+    
+
+],verfytoken,Conttroller.acceptFriendRequest);
+
+
+
 module.exports=Router
 

@@ -46,12 +46,54 @@ var sendFriendRequest=async(req,res,next)=>{
 }
 
 
+var acceptFriendRequest=async(req,res,next)=>{
+    
+    try{
+      
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            const error = new Error('validation faild');
+            error.statusCode = 422 ;
+            error.data = errors.array();
+            return next(error) ; 
+        }
+        const {requestId}=req.body;
+     
+   const frequest = await fRequest.find({_id:requestId,to:req.userId})
+   frequest.status=1;
+ await  frequest.save()
+
+ const from=     await fRequest.findById(frequest.from)
+ const to=     await fRequest.findById(frequest.to)
+
+
+ from.friends.push(frequest.to._id)
+ to.friends.push(frequest.from._id)
+        Response.Ok(res)
+await from.save()
+await to.save()
+
+    
+        }catch(err){
+            console.debug(err)
+                if(!err.statusCode){
+                    err.statusCode = 500; 
+                }
+                return next(err);
+        }
+        
+
+}
+
+
+
 
 
 
 
 module.exports={
-    sendFriendRequest
+    sendFriendRequest,
+    acceptFriendRequest
     
 
 
