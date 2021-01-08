@@ -75,6 +75,14 @@ const userSchema = new schema({
     groups:[{
       type:mongoose.Types.ObjectId,
       ref:"Groups"
+    }],
+    friends:[{
+      type:mongoose.Types.ObjectId,
+      ref:"User"
+    }],
+    FRequests:[{
+      type:mongoose.Types.ObjectId,
+      ref:"FRequest"
     }]
 
 });
