@@ -25,7 +25,19 @@ Router.post('/acceptFriendRequest',[
 
 ],verfytoken,Conttroller.acceptFriendRequest);
 
+Router.post('/blockUser',[
+   
+    body('blockeduserID')
+    .not()
+    .isEmpty(),
+  
+    
 
+],verfytoken,Conttroller.blockUser);
+
+Router.post('/editProfile',
+   
+verfytoken,Conttroller.editProfile);
 
 module.exports=Router
 
