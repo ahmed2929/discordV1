@@ -23,6 +23,30 @@ Router.put('/addMember',[
 
 ],verfytoken,groupConttroller.addMember);
 
+Router.put('/leaveFromGroup',[
+   
+    body('memberId')
+    .not()
+    .isEmpty(),
+    body('groupId')
+    .not()
+    .isEmpty(),
+    
+
+],verfytoken,groupConttroller.leaveFromGroup);
+
+Router.put('/removeFromGroup',[
+   
+    body('memberId')
+    .not()
+    .isEmpty(),
+    body('groupId')
+    .not()
+    .isEmpty(),
+    
+
+],verfytoken,groupConttroller.removeFromGroup);
+
 Router.post('/sendMessage',[
    
     // body('memberId')
